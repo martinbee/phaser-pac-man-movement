@@ -2,7 +2,7 @@ import 'pixi';
 import 'p2';
 import Phaser from 'phaser';
 
-import gameLoop from './gameLoop';
+import gameState from './states';
 
 // config
 const {
@@ -18,4 +18,7 @@ const renderer = GAME_RENDERER || Phaser.AUTO;
 const entryPoint = GAME_ENTRY_POINT || '';
 
 // initialize game
-const game = new Phaser.Game(width, height, renderer, entryPoint, gameLoop);
+const game = new Phaser.Game(width, height, renderer, entryPoint);
+
+game.state.add('GameState', gameState);
+game.state.start('GameState');
