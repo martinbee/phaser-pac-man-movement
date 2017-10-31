@@ -1,2 +1,3 @@
 node_modules
 public/assets/scripts/bundle*.js
+.DS_Store
