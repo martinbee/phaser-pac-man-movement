@@ -2,9 +2,14 @@ import 'pixi';
 import 'p2';
 import Phaser from 'phaser';
 
-import gameState from './states';
+import {
+  bootState,
+  preloadState,
+  mainMenuState,
+  gameState,
+} from './states';
 
-// config
+// game config
 const {
   GAME_WIDTH,
   GAME_HEIGHT,
@@ -20,5 +25,8 @@ const entryPoint = GAME_ENTRY_POINT || '';
 // initialize game
 const game = new Phaser.Game(width, height, renderer, entryPoint);
 
-game.state.add('GameState', gameState);
-game.state.start('GameState');
+game.state.add('Boot', bootState);
+game.state.add('Preload', preloadState);
+game.state.add('MainMenu', mainMenuState);
+game.state.add('Game', gameState);
+game.state.start('Boot');
