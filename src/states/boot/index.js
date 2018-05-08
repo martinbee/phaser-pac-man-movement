@@ -8,7 +8,7 @@ export default {
   preload() {
     // assets for preload state
     this.load.image('logo', 'assets/images/logo.png');
-    this.load.image('preloadbar', 'assets/images/preloader-bar.png');
+    this.load.image('preloadBar', 'assets/images/preload-bar.png');
   },
 
   create() {
