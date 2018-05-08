@@ -10,7 +10,7 @@ const {
   GAME_HEIGHT,
   GAME_RENDERER,
   GAME_ENTRY_POINT,
-} = process.env;
+} = process.env.gameSettings;
 
 const width = GAME_WIDTH || 800;
 const height = GAME_HEIGHT || 600;
