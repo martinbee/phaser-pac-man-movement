@@ -13,22 +13,13 @@ export default {
     this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY + 200, 'preloadBar');
     this.preloadBar.anchor.setTo(0.5);
 
+    // fix this preload bar (hard to test with few files)
     this.load.setPreloadSprite(this.preloadBar);
 
-    // load all other game assets
+    // load all other game assets (sounds, sprites, images, etc.)
+    this.load.image('space', 'assets/images/space.png');
   },
   create() {
     this.state.start('MainMenu');
   },
 };
-
-//preload: function() {
-////load game assets
-//this.load.image('space', 'assets/images/space.png');
-//this.load.image('rock', 'assets/images/rock.png');
-//this.load.spritesheet('playership', 'assets/images/player.png', 12, 12);
-//this.load.spritesheet('power', 'assets/images/power.png', 12, 12);
-//this.load.image('playerParticle', 'assets/images/player-particle.png');
-//this.load.audio('collect', 'assets/audio/collect.ogg');
-//this.load.audio('explosion', 'assets/audio/explosion.ogg');
-//},

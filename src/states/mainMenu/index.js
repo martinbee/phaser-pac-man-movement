@@ -8,11 +8,13 @@ export default {
       width,
       height,
     } = this.game;
+
     //show the space tile, repeated
-    //this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'space');
+    this.background = this.game.add.tileSprite(0, 0, width, height, 'space');
 
     //give it speed in x
-    //this.background.autoScroll(-20, 0);
+    this.background.autoScroll(-20, 0);
+
     const mainText = 'Tap to begin';
     const mainStyle = { font: '30px Arial', fill: '#fff', align: 'center' };
     const mainContent = this.game.add.text(width / 2, height / 2, mainText, mainStyle);

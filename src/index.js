@@ -25,6 +25,7 @@ const entryPoint = GAME_ENTRY_POINT || '';
 // initialize game
 const game = new Phaser.Game(width, height, renderer, entryPoint);
 
+// add game states and start boot
 game.state.add('Boot', bootState);
 game.state.add('Preload', preloadState);
 game.state.add('MainMenu', mainMenuState);
