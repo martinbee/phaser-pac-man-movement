@@ -6,8 +6,11 @@
 export default {
   preload() {
     // load logo
+    this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY - 20, 'logo');
+    this.splash.anchor.setTo(0.5);
+
     // load preload bar
-    this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY + 128, 'preloadbar');
+    this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY + 200, 'preloadBar');
     this.preloadBar.anchor.setTo(0.5);
 
     this.load.setPreloadSprite(this.preloadBar);
@@ -20,15 +23,6 @@ export default {
 };
 
   //preload: function() {
-    ////show logo in loading screen
-    //this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
-    //this.splash.anchor.setTo(0.5);
-
-    //this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY + 128, 'preloadbar');
-    //this.preloadBar.anchor.setTo(0.5);
-
-    //this.load.setPreloadSprite(this.preloadBar);
-
     ////load game assets
     //this.load.image('space', 'assets/images/space.png');
     //this.load.image('rock', 'assets/images/rock.png');

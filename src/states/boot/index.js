@@ -12,9 +12,6 @@ export default {
   },
 
   create() {
-    // loading screen will have a white background
-    this.game.stage.backgroundColor = '#fff';
-
     // scaling options (REFACTOR INTO WEBPACK??)
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.scale.minWidth = 240;
