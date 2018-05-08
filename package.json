@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
+    "lint": "eslint src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,11 +14,16 @@
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-config-base": "^1.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
     "expose-loader": "^0.7.3",
     "webpack": "^4.8.1",
     "webpack-cli": "^2.1.3",

@@ -7,15 +7,15 @@ This codebase is boilerplate for es6 webpack phaser projects
 - `npm start`
 
 ## Customize
-Change the object defined in states/index.js to create your own states, or add
-new states in /states/. Be sure to import your states and start them on the game
-instance defined in src/index.js.
+To customize, change the logic defined in states/
 
 ## Structure
-Either keep all the logic on the state/index.js or main state file or extract
+Either keep all the logic in the state/stateType/index.js file or extract
 into separate files like so:
 
 ```
+// ./state/exampleState/index.js
+
 import preload from './preload';
 import create from './create';
 import update from './update';
@@ -28,3 +28,6 @@ export default {
   ...utilities,
 };
 ```
+
+## Shoutout
+Shoutout to Zenva and their great [tutorial](https://gamedevacademy.org/html5-phaser-tutorial-spacehipster-a-space-exploration-game)
