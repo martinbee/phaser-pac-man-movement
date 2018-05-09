@@ -19,6 +19,9 @@ export default {
     const mainStyle = { font: '30px Arial', fill: '#fff', align: 'center' };
     const mainContent = this.game.add.text(width / 2, height / 2, mainText, mainStyle);
     mainContent.anchor.set(0.5);
+
+    // temp shortcut to avoid menu
+    this.game.state.start('Game');
   },
 
   update() {

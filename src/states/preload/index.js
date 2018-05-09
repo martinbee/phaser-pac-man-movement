@@ -18,6 +18,13 @@ export default {
 
     // load all other game assets (sounds, sprites, images, etc.)
     this.load.image('space', 'assets/images/space.png');
+    this.load.image('rock', 'assets/images/rock.png');
+    this.load.spritesheet('playerShip', 'assets/images/player.png', 12, 12);
+    this.load.spritesheet('power', 'assets/images/power.png', 12, 12);
+    this.load.image('playerParticle', 'assets/images/player-particle.png');
+
+    this.load.audio('collect', 'assets/audio/collect.ogg');
+    this.load.audio('explosion', 'assets/audio/explosion.ogg');
   },
   create() {
     this.state.start('MainMenu');
