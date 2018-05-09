@@ -2,13 +2,14 @@
 
 export default {
   create() {
-    // Breaks currently
-    //this.game.world.setBounds(0, 0, 1920, 1920);
     this.background = this.game.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'space');
 
     // player
     this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'playerShip');
+    this.player.anchor.setTo(0.5);
     this.player.scale.setTo(2);
+
+    // player animations
     this.player.animations.add('fly', [0, 1, 2, 3], 5, true);
     this.player.animations.play('fly');
 
