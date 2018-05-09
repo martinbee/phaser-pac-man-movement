@@ -25,11 +25,16 @@ export default {
     // camera
     this.game.camera.follow(this.player);
 
+    // generate obstables and collectibles
     this.generateAsteriods();
+    this.generateCollectibles();
 
     // audio
     this.explosionSound = this.game.add.audio('explosion');
     this.collectSound = this.game.add.audio('collect');
+
+    // show score
+    this.showLabels();
   },
   update() {
     if (this.game.input.activePointer.justPressed()) {
@@ -39,12 +44,15 @@ export default {
 
     //collision between player and asteroids
     this.game.physics.arcade.collide(this.player, this.asteroids, this.hitAsteroid, null, this);
+
+    //overlapping between player and collectibles
+    this.game.physics.arcade.overlap(this.player, this.collectibles, this.collect, null, this);
   },
 
   // handle end state by restarting to menu
   gameOver() {
     // pass it the score as a parameter
-    this.game.state.start('MainMenu', true, false);
+    this.game.state.start('MainMenu', true, false, this.playerScore);
   },
 
   // utility methods below
@@ -86,5 +94,45 @@ export default {
     this.player.kill();
 
     this.game.time.events.add(800, this.gameOver, this);
+  },
+
+  // collectibles
+  generateCollectibles() {
+    this.collectibles = this.game.add.group();
+
+    //enable physics in them
+    this.collectibles.enableBody = true;
+    this.collectibles.physicsBodyType = Phaser.Physics.ARCADE;
+
+    //phaser's random number generator
+    const numCollectibles = this.game.rnd.integerInRange(5, 10);
+    let collectible;
+
+    for (let i = 0; i < numCollectibles; i++) {
+      //add sprite
+      collectible = this.collectibles.create(this.game.world.randomX, this.game.world.randomY, 'power');
+      collectible.animations.add('fly', [0, 1, 2, 3], 5, true);
+      collectible.animations.play('fly');
+    }
+  },
+  collect(player, collectible) {
+    //play collect sound
+    this.collectSound.play();
+
+    //update score
+    this.playerScore++;
+    this.scoreLabel.text = this.playerScore;
+
+    //remove sprite
+    collectible.kill();
+  },
+
+  // score
+  showLabels() {
+    const text = '0';
+    const style = { font: '20px Arial', fill: '#fff', align: 'center' };
+
+    this.scoreLabel = this.game.add.text(this.game.width - 50, this.game.height - 50, text, style);
+    this.scoreLabel.fixedToCamera = true;
   },
 };
