@@ -26,7 +26,7 @@ export default {
     this.game.camera.follow(this.player);
 
     // generate obstables and collectibles
-    this.generateAsteriods();
+    this.generateAsteroids();
     this.generateCollectibles();
 
     // audio
@@ -58,7 +58,7 @@ export default {
   },
 
   // utility methods below
-  generateAsteriods() {
+  generateAsteroids() {
     this.asteroids = this.game.add.group();
 
     // enable physics in asteroids
@@ -67,18 +67,18 @@ export default {
 
     // phaser's random number generator
     const numAsteroids = this.game.rnd.integerInRange(10, 20);
-    let asteriod;
+    let asteroid;
 
     for (let i = 0; i < numAsteroids; i += 1) {
       // add sprite
-      asteriod = this.asteroids.create(this.game.world.randomX, this.game.world.randomY, 'rock');
-      asteriod.scale.setTo(this.game.rnd.integerInRange(10, 40) / 10);
+      asteroid = this.asteroids.create(this.game.world.randomX, this.game.world.randomY, 'rock');
+      asteroid.scale.setTo(this.game.rnd.integerInRange(10, 40) / 10);
 
       // physics properties
-      asteriod.body.velocity.x = this.game.rnd.integerInRange(-20, 20);
-      asteriod.body.velocity.y = this.game.rnd.integerInRange(-20, 20);
-      asteriod.body.immovable = true;
-      asteriod.body.collideWorldBounds = true;
+      asteroid.body.velocity.x = this.game.rnd.integerInRange(-20, 20);
+      asteroid.body.velocity.y = this.game.rnd.integerInRange(-20, 20);
+      asteroid.body.immovable = true;
+      asteroid.body.collideWorldBounds = true;
     }
   },
   hitAsteroid() {
