@@ -5,28 +5,38 @@
 
 export default {
   preload() {
+    const {
+      game,
+      add,
+      load,
+    } = this;
+
+    const { centerX, centerY } = game.world;
+
     // load logo
-    this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY - 20, 'logo');
+    this.splash = add.sprite(centerX, centerY - 20, 'logo');
     this.splash.anchor.setTo(0.5);
 
     // load preload bar
-    this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY + 200, 'preloadBar');
+    this.preloadBar = add.sprite(centerX, centerY + 200, 'preloadBar');
     this.preloadBar.anchor.setTo(0.5);
 
     // fix this preload bar (hard to test with few files)
-    this.load.setPreloadSprite(this.preloadBar);
+    load.setPreloadSprite(this.preloadBar);
 
     // load all other game assets (sounds, sprites, images, etc.)
-    this.load.image('space', 'assets/images/space.png');
-    this.load.image('rock', 'assets/images/rock.png');
-    this.load.spritesheet('playerShip', 'assets/images/player.png', 12, 12);
-    this.load.spritesheet('power', 'assets/images/power.png', 12, 12);
-    this.load.image('playerParticle', 'assets/images/player-particle.png');
+    load.image('space', 'assets/images/space.png');
+    load.image('rock', 'assets/images/rock.png');
+    load.spritesheet('playerShip', 'assets/images/player.png', 12, 12);
+    load.spritesheet('power', 'assets/images/power.png', 12, 12);
+    load.image('playerParticle', 'assets/images/player-particle.png');
 
-    this.load.audio('collect', 'assets/audio/collect.ogg');
-    this.load.audio('explosion', 'assets/audio/explosion.ogg');
+    load.audio('collect', 'assets/audio/collect.ogg');
+    load.audio('explosion', 'assets/audio/explosion.ogg');
   },
+
   create() {
+    // start main menu state
     this.state.start('MainMenu');
   },
 };

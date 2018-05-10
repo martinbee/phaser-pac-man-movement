@@ -36,7 +36,9 @@ export default {
     // show score
     this.showLabels();
   },
+
   update() {
+    // catch user clicking mouse event
     if (this.game.input.activePointer.justPressed()) {
       // move on the direction of the input
       this.game.physics.arcade.moveToPointer(this.player, this.playerSpeed);
@@ -45,7 +47,7 @@ export default {
     //collision between player and asteroids
     this.game.physics.arcade.collide(this.player, this.asteroids, this.hitAsteroid, null, this);
 
-    //overlapping between player and collectibles
+    //overlapping between player and collectibles (overlap does not affect player physics)
     this.game.physics.arcade.overlap(this.player, this.collectibles, this.collect, null, this);
   },
 
@@ -67,7 +69,7 @@ export default {
     const numAsteroids = this.game.rnd.integerInRange(10, 20);
     let asteriod;
 
-    for (let i = 0; i < numAsteroids; i++) {
+    for (let i = 0; i < numAsteroids; i += 1) {
       // add sprite
       asteriod = this.asteroids.create(this.game.world.randomX, this.game.world.randomY, 'rock');
       asteriod.scale.setTo(this.game.rnd.integerInRange(10, 40) / 10);
@@ -108,7 +110,7 @@ export default {
     const numCollectibles = this.game.rnd.integerInRange(5, 10);
     let collectible;
 
-    for (let i = 0; i < numCollectibles; i++) {
+    for (let i = 0; i < numCollectibles; i += 1) {
       //add sprite
       collectible = this.collectibles.create(this.game.world.randomX, this.game.world.randomY, 'power');
       collectible.animations.add('fly', [0, 1, 2, 3], 5, true);
@@ -120,7 +122,7 @@ export default {
     this.collectSound.play();
 
     //update score
-    this.playerScore++;
+    this.playerScore += 1;
     this.scoreLabel.text = this.playerScore;
 
     //remove sprite
@@ -129,10 +131,18 @@ export default {
 
   // score
   showLabels() {
+    const {
+      add,
+      game: {
+        width,
+        height,
+      },
+    } = this;
+
     const text = '0';
     const style = { font: '20px Arial', fill: '#fff', align: 'center' };
 
-    this.scoreLabel = this.game.add.text(this.game.width - 50, this.game.height - 50, text, style);
+    this.scoreLabel = add.text(width - 50, height - 50, text, style);
     this.scoreLabel.fixedToCamera = true;
   },
 };

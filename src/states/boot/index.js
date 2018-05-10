@@ -6,25 +6,32 @@ import Phaser from 'phaser';
 
 export default {
   preload() {
-    // assets for preload state
+    // load assets for preload state
     this.load.image('logo', 'assets/images/logo.png');
     this.load.image('preloadBar', 'assets/images/preload-bar.png');
   },
 
   create() {
+    const {
+      scale,
+      game,
+      state,
+    } = this;
+
     // scaling options (REFACTOR INTO WEBPACK??)
-    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    this.scale.minWidth = 240;
-    this.scale.minHeight = 170;
-    this.scale.maxWidth = 2880;
-    this.scale.maxHeight = 1920;
+    scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    scale.minWidth = 240;
+    scale.minHeight = 170;
+    scale.maxWidth = 2880;
+    scale.maxHeight = 1920;
 
     // have the game centered horizontally
-    this.scale.pageAlignHorizontally = true;
+    scale.pageAlignHorizontally = true;
 
     // physics system for movement
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    this.state.start('Preload');
+    // start preload state
+    state.start('Preload');
   },
 };
