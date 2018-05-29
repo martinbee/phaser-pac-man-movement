@@ -2,6 +2,7 @@
 // are loaded into the memory (from the disk). The preloading screen is shown to
 // the user, which usually includes a loading bar to show the progress.
 // Should start main menu state in create
+import Phaser from 'phaser';
 
 export default {
   preload() {
@@ -25,11 +26,12 @@ export default {
     load.setPreloadSprite(this.preloadBar);
 
     // load all other game assets (sounds, sprites, images, etc.)
-    load.image('space', 'assets/images/space.png');
-    load.image('rock', 'assets/images/rock.png');
-    load.spritesheet('playerShip', 'assets/images/player.png', 12, 12);
-    load.spritesheet('power', 'assets/images/power.png', 12, 12);
-    load.image('playerParticle', 'assets/images/player-particle.png');
+    load.image('car', 'assets/images/car.png');
+    load.image('dot', 'assets/images/dot.png');
+    load.image('pacman', 'assets/images/pacman.png');
+    load.image('pacmanTiles', 'assets/images/pacman-tiles.png');
+    load.image('tiles', 'assets/images/tiles.png');
+    load.tilemap('map', 'assets/tilemaps/maze.json', null, Phaser.Tilemap.TILED_JSON);
 
     load.audio('collect', 'assets/audio/collect.ogg');
     load.audio('explosion', 'assets/audio/explosion.ogg');

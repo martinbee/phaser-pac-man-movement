@@ -3,31 +3,22 @@ import Phaser from 'phaser';
 
 export default {
   create() {
-    this.background = this.game.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'space');
-
-    // player
-    this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'playerShip');
-    this.player.anchor.setTo(0.5);
-    this.player.scale.setTo(2);
-
-    // player animations
-    this.player.animations.add('fly', [0, 1, 2, 3], 5, true);
-    this.player.animations.play('fly');
-
     // player initial score
     this.playerScore = 0;
 
-    //enable player physics
-    this.game.physics.arcade.enable(this.player);
-    this.playerSpeed = 120;
-    this.player.body.collideWorldBounds = true;
+    this.map = this.add.tilemap('map');
+    this.map.addTilesetImage('tiles', 'tiles');
 
-    // camera
-    this.game.camera.follow(this.player);
+    this.layer = this.map.createLayer('Tile Layer 1');
 
-    // generate obstables and collectibles
-    this.generateAsteroids();
-    this.generateCollectibles();
+    this.map.setCollision(20, true, this.layer);
+
+    this.car = this.add.sprite(48, 48, 'car');
+    this.car.anchor.set(0.5);
+    this.physics.enable(this.car);
+
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.move(Phaser.DOWN);
 
     // audio
     this.explosionSound = this.game.add.audio('explosion');
@@ -38,17 +29,7 @@ export default {
   },
 
   update() {
-    // catch user clicking mouse event
-    if (this.game.input.activePointer.justPressed()) {
-      // move on the direction of the input
-      this.game.physics.arcade.moveToPointer(this.player, this.playerSpeed);
-    }
-
-    //collision between player and asteroids
-    this.game.physics.arcade.collide(this.player, this.asteroids, this.hitAsteroid, null, this);
-
-    //overlapping between player and collectibles (overlap does not affect player physics)
-    this.game.physics.arcade.overlap(this.player, this.collectibles, this.collect, null, this);
+    this.physics.arcade.collide(this.car, this.layer);
   },
 
   // handle end state by restarting to menu
@@ -57,77 +38,36 @@ export default {
     this.game.state.start('MainMenu', true, false, this.playerScore);
   },
 
-  // utility methods below
-  generateAsteroids() {
-    this.asteroids = this.game.add.group();
-
-    // enable physics in asteroids
-    this.asteroids.enableBody = true;
-    this.asteroids.physicsBodyType = Phaser.Physics.ARCADE;
-
-    // phaser's random number generator
-    const numAsteroids = this.game.rnd.integerInRange(10, 20);
-    let asteroid;
-
-    for (let i = 0; i < numAsteroids; i += 1) {
-      // add sprite
-      asteroid = this.asteroids.create(this.game.world.randomX, this.game.world.randomY, 'rock');
-      asteroid.scale.setTo(this.game.rnd.integerInRange(10, 40) / 10);
-
-      // physics properties
-      asteroid.body.velocity.x = this.game.rnd.integerInRange(-20, 20);
-      asteroid.body.velocity.y = this.game.rnd.integerInRange(-20, 20);
-      asteroid.body.immovable = true;
-      asteroid.body.collideWorldBounds = true;
-    }
-  },
-  hitAsteroid() {
-    //play explosion sound
-    this.explosionSound.play();
-
-    //player explosion will be added here
-    const emitter = this.game.add.emitter(this.player.x, this.player.y, 100);
-    emitter.makeParticles('playerParticle');
-    emitter.minParticleSpeed.setTo(-200, -200);
-    emitter.maxParticleSpeed.setTo(200, 200);
-    emitter.gravity = 0;
-    emitter.start(true, 1000, null, 100);
-
-    this.player.kill();
-
-    this.game.time.events.add(800, this.gameOver, this);
-  },
-
   // collectibles
-  generateCollectibles() {
-    this.collectibles = this.game.add.group();
+  //generateCollectibles() {
+    //this.collectibles = this.game.add.group();
 
-    //enable physics in them
-    this.collectibles.enableBody = true;
-    this.collectibles.physicsBodyType = Phaser.Physics.ARCADE;
+    ////enable physics in them
+    //this.collectibles.enableBody = true;
+    //this.collectibles.physicsBodyType = Phaser.Physics.ARCADE;
 
-    //phaser's random number generator
-    const numCollectibles = this.game.rnd.integerInRange(5, 10);
-    let collectible;
+    ////phaser's random number generator
+    //const numCollectibles = this.game.rnd.integerInRange(5, 10);
+    //let collectible;
 
-    for (let i = 0; i < numCollectibles; i += 1) {
-      //add sprite
-      collectible = this.collectibles.create(this.game.world.randomX, this.game.world.randomY, 'power');
-      collectible.animations.add('fly', [0, 1, 2, 3], 5, true);
-      collectible.animations.play('fly');
-    }
-  },
-  collect(player, collectible) {
-    //play collect sound
-    this.collectSound.play();
+    //for (let i = 0; i < numCollectibles; i += 1) {
+      ////add sprite
+      //collectible = this.collectibles.create(this.game.world.randomX, this.game.world.randomY, 'power');
+      //collectible.animations.add('fly', [0, 1, 2, 3], 5, true);
+      //collectible.animations.play('fly');
+    //}
+  //},
+  //collect(player, collectible) {
+    ////play collect sound
+    //this.collectSound.play();
 
-    //update score
-    this.playerScore += 1;
-    this.scoreLabel.text = this.playerScore;
+    ////update score
+    //this.playerScore += 1;
+    //this.scoreLabel.text = this.playerScore;
 
-    //remove sprite
-    collectible.kill();
-  },
+    ////remove sprite
+    //collectible.kill();
+  //},
 
   // score
   showLabels() {
